@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	background: whitesmoke;
+	color: #000;
+}
+
+input {
+    border: solid 1px blue;
+    background-color: blue;
+    color: #fff;
+}
+
+input:hover {
+    border: solid 1px lightgray;
+    background-color: lightgray;
+    color: #000;
+    cursor: pointer;
+}
