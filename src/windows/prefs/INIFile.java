@@ -1,17 +1,13 @@
 // INIFile.java
-
 // Copyright (C) 2013 Pedro Fernandes
-
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
 // General Public License as published by the Free Software Foundation; either version 2 of the 
 // License, or (at your option) any later version.
-
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
 // even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See 
 // the GNU General Public License for more details. You should have received a copy of the GNU 
 // General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 
 // Temple Place, Suite 330, Boston, MA 02111-1307 USA
-
 package windows.prefs;
 
 import java.io.BufferedReader;
@@ -34,18 +30,18 @@ public class INIFile {
     private Map< String, Map< String, String>> _entries = new HashMap<>();
 
     /**
-     * 
+     *
      * @param stream
-     * @throws IOException 
+     * @throws IOException
      */
     public INIFile(InputStream stream) throws IOException {
         load(stream);
     }
 
     /**
-     * 
+     *
      * @param stream
-     * @throws IOException 
+     * @throws IOException
      */
     public void load(InputStream stream) throws IOException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(stream))) {
@@ -72,11 +68,11 @@ public class INIFile {
     }
 
     /**
-     * 
+     *
      * @param section
      * @param key
      * @param defaultvalue
-     * @return 
+     * @return
      */
     public String getString(String section, String key, String defaultvalue) {
         Map< String, String> kv = _entries.get(section);
@@ -87,11 +83,11 @@ public class INIFile {
     }
 
     /**
-     * 
+     *
      * @param section
      * @param key
      * @param defaultvalue
-     * @return 
+     * @return
      */
     public int getInt(String section, String key, int defaultvalue) {
         Map< String, String> kv = _entries.get(section);
@@ -102,11 +98,11 @@ public class INIFile {
     }
 
     /**
-     * 
+     *
      * @param section
      * @param key
      * @param defaultvalue
-     * @return 
+     * @return
      */
     public float getFloat(String section, String key, float defaultvalue) {
         Map< String, String> kv = _entries.get(section);
@@ -117,11 +113,11 @@ public class INIFile {
     }
 
     /**
-     * 
+     *
      * @param section
      * @param key
      * @param defaultvalue
-     * @return 
+     * @return
      */
     public double getDouble(String section, String key, double defaultvalue) {
         Map< String, String> kv = _entries.get(section);
