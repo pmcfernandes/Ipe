@@ -29,7 +29,7 @@ public class ManifestInfo {
     private String title;
     private String description;
     private String version;
-    private String autor;
+    private String author;
     private String icon;
 
     /**
@@ -43,7 +43,7 @@ public class ManifestInfo {
 
             title = iniFile.getString("program", "title", "");
             icon = iniFile.getString("program", "icon", "");
-            autor = iniFile.getString("program", "author", "");
+            author = iniFile.getString("program", "author", "");
             version = iniFile.getString("program", "version", "1.0.0");
             description = iniFile.getString("program", "description", "");
 
@@ -80,8 +80,8 @@ public class ManifestInfo {
      *
      * @return
      */
-    public String getAutor() {
-        return autor;
+    public String getAuthor() {
+        return author;
     }
 
     /**

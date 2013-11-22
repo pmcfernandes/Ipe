@@ -30,7 +30,7 @@ public class Ipe extends Application {
 
     /**
      *
-     * @param stage
+     * @param primaryStage
      * @throws URISyntaxException
      */
     @Override
@@ -38,7 +38,7 @@ public class Ipe extends Application {
         // load manifest
         ManifestInfo manifestInfo = new ManifestInfo();
 
-        // ceate server
+        // create server
         server = new NativeHostServer("/");
 
         // create the scene       

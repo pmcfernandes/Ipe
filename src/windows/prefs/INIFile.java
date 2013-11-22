@@ -71,59 +71,64 @@ public class INIFile {
      *
      * @param section
      * @param key
-     * @param defaultvalue
+     * @param defaultValue
      * @return
      */
-    public String getString(String section, String key, String defaultvalue) {
+    public String getString(String section, String key, String defaultValue) {
         Map< String, String> kv = _entries.get(section);
         if (kv == null) {
-            return defaultvalue;
+            return defaultValue;
+        } else {
+            return kv.get(key);
         }
-        return kv.get(key);
     }
 
     /**
      *
      * @param section
      * @param key
-     * @param defaultvalue
+     * @param defaultValue
      * @return
      */
-    public int getInt(String section, String key, int defaultvalue) {
+    public int getInt(String section, String key, int defaultValue) {
         Map< String, String> kv = _entries.get(section);
         if (kv == null) {
-            return defaultvalue;
+            return defaultValue;
+        } else {
+            return Integer.parseInt(kv.get(key));
         }
-        return Integer.parseInt(kv.get(key));
     }
 
     /**
      *
      * @param section
      * @param key
-     * @param defaultvalue
+     * @param defaultValue
      * @return
      */
-    public float getFloat(String section, String key, float defaultvalue) {
+    public float getFloat(String section, String key, float defaultValue) {
         Map< String, String> kv = _entries.get(section);
         if (kv == null) {
-            return defaultvalue;
+            return defaultValue;
+        } else {
+            return Float.parseFloat(kv.get(key));
         }
-        return Float.parseFloat(kv.get(key));
+
     }
 
     /**
      *
      * @param section
      * @param key
-     * @param defaultvalue
+     * @param defaultValue
      * @return
      */
-    public double getDouble(String section, String key, double defaultvalue) {
+    public double getDouble(String section, String key, double defaultValue) {
         Map< String, String> kv = _entries.get(section);
         if (kv == null) {
-            return defaultvalue;
+            return defaultValue;
+        } else {
+            return Double.parseDouble(kv.get(key));
         }
-        return Double.parseDouble(kv.get(key));
     }
 }

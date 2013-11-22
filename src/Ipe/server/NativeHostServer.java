@@ -43,7 +43,7 @@ public final class NativeHostServer {
         url = (applicationUrl == null ? "/" : applicationUrl);
 
         try {
-            // find avalable port
+            // find available port
             port = findAvailablePort();
 
             // load host handler

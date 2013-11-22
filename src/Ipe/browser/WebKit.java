@@ -15,6 +15,9 @@
 package Ipe.browser;
 
 import java.net.URISyntaxException;
+
+import Ipe.scripting.Media;
+import Ipe.scripting.UI;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
@@ -51,8 +54,10 @@ public class WebKit extends Region {
         return new ChangeListener<State>() {
             @Override
             public void changed(ObservableValue<? extends State> ov, State oldState, State newState) {
-                JSObject win = (JSObject) webEngine.executeScript("window");
-                win.setMember("app", new Scripting(stage));
+            JSObject win = (JSObject) webEngine.executeScript("window");
+            win.setMember("ui", new UI(stage));
+            win.setMember("media", new Media(stage));
+            win.setMember("app", new Scripting(stage));
             }
         };
     }
@@ -70,22 +75,12 @@ public class WebKit extends Region {
         webEngine.setOnAlert(new EventHandler<WebEvent<String>>() {
             @Override
             public void handle(WebEvent<String> arg0) {
-                JOptionPane.showMessageDialog(null, arg0.getData(), "Alert", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, arg0.getData(), "Alert", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        
+
         webEngine.getLoadWorker().stateProperty().addListener(getChangeListener(stage));
         webEngine.load(server.getRootUri().toString());
-    }
-
-    /**
-     *
-     * @return
-     */
-    private Node createSpacer() {
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-        return spacer;
     }
 
     /**

@@ -1,11 +1,12 @@
 // JavaScript Document
 function init() {
-    document.getElementById("demo").innerHTML = "Ola";   
+   $("#demo").html("Ola3");
 }
 
 $(document).ready(function() {
+   init();
+
    $("#btn").on('click', function() {
-      window.app.error(window.app.Properties.getString('customText'));
-      window.app.quit();
+       window.app.error("Ola");
    });
 });

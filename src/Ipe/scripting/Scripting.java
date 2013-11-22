@@ -27,7 +27,8 @@ public class Scripting {
      * Public variables
      */
     public Properties Properties = new Properties();
-    
+    public Media Media;
+
     /**
      * Private variables
      */
@@ -38,7 +39,8 @@ public class Scripting {
      * @param stage
      */
     public Scripting(Stage stage) {
-        this._stage = stage;        
+        this._stage = stage;
+        this.Media = new Media(this._stage);
     }
 
     /**
