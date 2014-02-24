@@ -15,18 +15,37 @@
 package Ipe;
 
 import Ipe.browser.WebKit;
+import Ipe.server.NativeHostServer;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import Ipe.server.NativeHostServer;
 
 public class Ipe extends Application {
 
     private Scene scene;
-    private NativeHostServer server;
+    public static NativeHostServer server;
+
+    private void loadServer() throws URISyntaxException {
+        // create server
+        Ipe.server = new NativeHostServer("/");
+    }
+
+    private void loadManifest(Stage stage) {
+        // load manifest
+        ManifestInfo manifestInfo = new ManifestInfo();
+
+        stage.setTitle(manifestInfo.getTitle());
+        if (!manifestInfo.getIcon().isEmpty()) {
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(manifestInfo.getIcon());
+            if (inputStream != null) {
+                stage.getIcons().add(new Image(inputStream));
+            }
+        }
+    }
 
     /**
      *
@@ -34,22 +53,21 @@ public class Ipe extends Application {
      * @throws URISyntaxException
      */
     @Override
-    public void start(Stage primaryStage) throws URISyntaxException {        
-        // load manifest
-        ManifestInfo manifestInfo = new ManifestInfo();
+    public void start(Stage primaryStage) throws URISyntaxException, Exception {
+        if (primaryStage == null) {
+            throw new Exception("primaryStage is null or empty.");
+        }
 
-        // create server
-        server = new NativeHostServer("/");
+        this.loadServer();
+        this.loadManifest(primaryStage);
 
         // create the scene       
-        scene = new Scene(new WebKit(server, primaryStage), 750, 500, Color.web("#666970"));
-        primaryStage.setScene(scene);
-        primaryStage.setTitle(manifestInfo.getTitle());
-
-        if (!manifestInfo.getIcon().isEmpty()) {
-            primaryStage.getIcons().add(new Image(this.getClass().getClassLoader().getResourceAsStream(manifestInfo.getIcon())));
+        scene = new Scene(new WebKit("index.html", primaryStage), 750, 500, Color.web("#666970"));
+        if (scene == null) {
+            return;
         }
         
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

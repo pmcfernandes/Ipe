@@ -156,10 +156,10 @@ public class NativeHostHandler implements HttpHandler {
                 header.set("Content-Length", (new Integer(b.length)).toString());
                 header.set("Connection", "Close");
                 exchange.sendResponseHeaders(200, 0);
-
-                OutputStream body = exchange.getResponseBody();
-                body.write(b);
-                body.close();
+                
+                try (OutputStream body = exchange.getResponseBody()) {
+                    body.write(b);
+                }
 
                 System.out.println("Response content type = " + contentType);
             } else {

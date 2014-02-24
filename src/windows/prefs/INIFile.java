@@ -1,13 +1,17 @@
 // INIFile.java
+
 // Copyright (C) 2013 Pedro Fernandes
+
 // This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
 // General Public License as published by the Free Software Foundation; either version 2 of the 
 // License, or (at your option) any later version.
+
 // This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
 // even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See 
 // the GNU General Public License for more details. You should have received a copy of the GNU 
 // General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 
 // Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
 package windows.prefs;
 
 import java.io.BufferedReader;
@@ -23,14 +27,15 @@ import java.util.regex.Pattern;
  *
  * @author PFernandes
  */
-public class INIFile {
+public final class INIFile {
 
     private Pattern _section = Pattern.compile("\\s*\\[([^]]*)\\]\\s*");
     private Pattern _keyValue = Pattern.compile("\\s*([^=]*)=(.*)");
     private Map< String, Map< String, String>> _entries = new HashMap<>();
 
     /**
-     *
+     * Constructor for instance
+     * 
      * @param stream
      * @throws IOException
      */
@@ -39,7 +44,8 @@ public class INIFile {
     }
 
     /**
-     *
+     * Load INI file into memory
+     * 
      * @param stream
      * @throws IOException
      */
@@ -56,7 +62,8 @@ public class INIFile {
                     if (m.matches()) {
                         String key = m.group(1).trim();
                         String value = m.group(2).trim();
-                        Map< String, String> kv = _entries.get(section);
+                        Map<String, String> kv = _entries.get(section);
+                        
                         if (kv == null) {
                             _entries.put(section, kv = new HashMap<>());
                         }
@@ -68,7 +75,8 @@ public class INIFile {
     }
 
     /**
-     *
+     * Get string value
+     * 
      * @param section
      * @param key
      * @param defaultValue
@@ -84,7 +92,8 @@ public class INIFile {
     }
 
     /**
-     *
+     * Get integer value
+     * 
      * @param section
      * @param key
      * @param defaultValue
@@ -100,7 +109,8 @@ public class INIFile {
     }
 
     /**
-     *
+     * Get float value
+     * 
      * @param section
      * @param key
      * @param defaultValue
@@ -113,18 +123,18 @@ public class INIFile {
         } else {
             return Float.parseFloat(kv.get(key));
         }
-
     }
 
     /**
-     *
+     * Get double value
+     * 
      * @param section
      * @param key
      * @param defaultValue
      * @return
      */
     public double getDouble(String section, String key, double defaultValue) {
-        Map< String, String> kv = _entries.get(section);
+        Map<String, String> kv = _entries.get(section);
         if (kv == null) {
             return defaultValue;
         } else {

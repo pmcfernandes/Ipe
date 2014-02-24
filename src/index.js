@@ -1,12 +1,18 @@
 // JavaScript Document
-function init() {
-   $("#demo").html("Ola3");
+function btnCustomProperty_Click() {
+    var x = window.app.getProperties().getString("customText");   
+    alert(x);
 }
 
-$(document).ready(function() {
-   init();
+function btnQuit_Click() {
+    window.app.quit();
+}
 
-   $("#btn").on('click', function() {
-       window.app.error("Ola");
-   });
-});
+function btnPasteClipboard_Click() {
+    var x = window.app.Clipboard.getText()
+    document.getElementById("demo").innerHTML = x;
+}
+
+function btnNewWindow_Click() {
+    window.app.UI.createDialog("index_1.html", "Test a new window", 300, 200);
+}

@@ -60,7 +60,7 @@ public final class NativeHostServer {
         } catch (IOException ex) {
             Logger.getLogger(NativeHostServer.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }        
 
     /**
      *
@@ -83,12 +83,8 @@ public final class NativeHostServer {
      * @return @throws IOException
      */
     private int findAvailablePort() throws IOException {
-        int availablePort = 0;
-
-        ServerSocket s = new ServerSocket(0);
-        availablePort = s.getLocalPort();
-        s.close();
-
-        return availablePort;
+        try (ServerSocket s = new ServerSocket(0)) {
+            return s.getLocalPort();
+        }
     }
 }

@@ -37,19 +37,27 @@ public class ManifestInfo {
      */
     public ManifestInfo() {
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream("manifest.ini");
+        INIFile iniFile;
 
         try {
-            INIFile iniFile = new INIFile(stream);
-
-            title = iniFile.getString("program", "title", "");
-            icon = iniFile.getString("program", "icon", "");
-            author = iniFile.getString("program", "author", "");
-            version = iniFile.getString("program", "version", "1.0.0");
-            description = iniFile.getString("program", "description", "");
-
+            iniFile = new INIFile(stream);
+            this.load(iniFile);
         } catch (IOException ex) {
             Logger.getLogger(ManifestInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * Load values from file
+     * 
+     * @param file 
+     */
+    private void load(INIFile file) {
+        this.setTitle(file.getString("program", "title", ""));
+        this.setIcon(file.getString("program", "icon", ""));
+        this.setAuthor(file.getString("program", "author", ""));
+        this.setVersion(file.getString("program", "version", "1.0.0"));
+        this.setDescription(file.getString("program", "description", ""));
     }
 
     /**
@@ -57,7 +65,15 @@ public class ManifestInfo {
      * @return
      */
     public String getTitle() {
-        return title;
+        return this.title;
+    }
+
+    /**
+     * 
+     * @param value 
+     */
+    private void setTitle(String value) {
+        this.title = value;
     }
 
     /**
@@ -65,7 +81,15 @@ public class ManifestInfo {
      * @return
      */
     public String getDescription() {
-        return description;
+        return this.description;
+    }
+
+    /**
+     * 
+     * @param value 
+     */
+    private void setDescription(String value) {
+        this.description = value;
     }
 
     /**
@@ -77,11 +101,27 @@ public class ManifestInfo {
     }
 
     /**
+     * 
+     * @param value 
+     */
+    private void setVersion(String value) {
+        this.version = value;
+    }
+
+    /**
      *
      * @return
      */
     public String getAuthor() {
-        return author;
+        return this.author;
+    }
+
+    /**
+     * 
+     * @param value 
+     */
+    private void setAuthor(String value) {
+        this.author = value;
     }
 
     /**
@@ -89,6 +129,14 @@ public class ManifestInfo {
      * @return
      */
     public String getIcon() {
-        return icon;
+        return this.icon;
+    }
+
+    /**
+     * 
+     * @param icon 
+     */
+    private void setIcon(String icon) {
+        this.icon = icon;
     }
 }

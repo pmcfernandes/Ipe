@@ -2,13 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Untitled Document</title>
-    <link type="text/css" rel="stylesheet" href="index.css" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="index.js"></script>    
+    <title>First Screen</title>
+    <link type="text/css" rel="stylesheet" href="index.css" />     
+    <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
     <div id="demo">demo</div>
-    <input type="button" id="btn" value="botão" />     
+    <input type="button" id="btnPasteClipboard" value="Paste from clipboard" onclick="btnPasteClipboard_Click();" /> 
+    <input type="button" id="btnCustomProperty" value="Show custom property" onclick="btnCustomProperty_Click();" />            
+    <input type="button" id="btnQuit" value="Quit application" onclick="btnQuit_Click();" />     
+    <input type="button" id="btnNewWindow" value="New Window" onclick="btnNewWindow_Click();" />     
 </body>
 </html>

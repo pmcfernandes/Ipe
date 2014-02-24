@@ -16,17 +16,14 @@ package Ipe.browser;
 
 import java.net.URISyntaxException;
 
-import Ipe.scripting.Media;
-import Ipe.scripting.UI;
+import Ipe.scripting.Scripting;
+import Ipe.Ipe;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebEvent;
@@ -34,8 +31,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import netscape.javascript.JSObject;
-import Ipe.scripting.Scripting;
-import Ipe.server.NativeHostServer;
 
 /**
  *
@@ -54,10 +49,8 @@ public class WebKit extends Region {
         return new ChangeListener<State>() {
             @Override
             public void changed(ObservableValue<? extends State> ov, State oldState, State newState) {
-            JSObject win = (JSObject) webEngine.executeScript("window");
-            win.setMember("ui", new UI(stage));
-            win.setMember("media", new Media(stage));
-            win.setMember("app", new Scripting(stage));
+                JSObject win = (JSObject) webEngine.executeScript("window");
+                win.setMember("app", new Scripting(stage));
             }
         };
     }
@@ -67,7 +60,7 @@ public class WebKit extends Region {
      * @param server
      * @throws URISyntaxException
      */
-    public WebKit(NativeHostServer server, Stage stage) throws URISyntaxException {
+    public WebKit(String url, Stage stage) throws URISyntaxException {
         this.getChildren().add(browser);
         this.browser.setContextMenuEnabled(false);
 
@@ -75,12 +68,13 @@ public class WebKit extends Region {
         webEngine.setOnAlert(new EventHandler<WebEvent<String>>() {
             @Override
             public void handle(WebEvent<String> arg0) {
-            JOptionPane.showMessageDialog(null, arg0.getData(), "Alert", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, arg0.getData(),
+                        "Alert", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
         webEngine.getLoadWorker().stateProperty().addListener(getChangeListener(stage));
-        webEngine.load(server.getRootUri().toString());
+        webEngine.load(Ipe.server.getRootUri() + url);
     }
 
     /**

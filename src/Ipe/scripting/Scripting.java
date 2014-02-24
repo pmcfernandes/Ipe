@@ -14,6 +14,7 @@
 
 package Ipe.scripting;
 
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
@@ -23,12 +24,14 @@ import javax.swing.JOptionPane;
  */
 public class Scripting {
 
-    /**
-     * Public variables
-     */
-    public Properties Properties = new Properties();
+    // Private variables
+    private Properties props = null;    
+   
+    // Public variables
     public Media Media;
-
+    public UI UI;
+    public Clipboard Clipboard;
+    
     /**
      * Private variables
      */
@@ -40,7 +43,24 @@ public class Scripting {
      */
     public Scripting(Stage stage) {
         this._stage = stage;
+        
+        // Instance a new objects to comunicate between web and desktop
+        this.Clipboard = new Clipboard(this._stage);
         this.Media = new Media(this._stage);
+        this.UI = new UI(this._stage);
+    }
+
+    /**
+     * Get properties of application
+     * 
+     * @return 
+     */
+    public Properties getProperties() {
+        if (props == null) {
+            props = new Properties();
+        }
+
+        return props;
     }
 
     /**
@@ -48,29 +68,32 @@ public class Scripting {
      * @param msg
      */
     public void error(String msg) {
-        JOptionPane.showMessageDialog(null, msg, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    /**
-     * 
-     * @param msg 
-     */
-    public void info(String msg) {
-        JOptionPane.showMessageDialog(null, msg, "Information", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-    /**
-     * 
-     * @param msg 
-     */
-    public void alert(String msg) {
-        JOptionPane.showMessageDialog(null, msg, "Alert", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showMessageDialog(null, msg,
+                "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     /**
      *
+     * @param msg
+     */
+    public void info(String msg) {
+        JOptionPane.showMessageDialog(null, msg,
+                "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     *
+     * @param msg
+     */
+    public void alert(String msg) {
+        JOptionPane.showMessageDialog(null, msg,
+                "Alert", JOptionPane.DEFAULT_OPTION);
+    }
+
+    /**
+     * Quit command
      */
     public void quit() {
-        this._stage.close();
+        Platform.exit();
     }
 }
