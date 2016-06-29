@@ -24,11 +24,12 @@ import javafx.stage.Stage;
 public class Clipboard {
 
     // Private variables
-    private java.awt.datatransfer.Clipboard c;
-    private Stage _stage;
+    private final java.awt.datatransfer.Clipboard c;
+    private final Stage _stage;
     
     /**
      * Constructor for instance
+     * @param stage
      */
     public Clipboard(Stage stage) {
         this._stage = stage;    

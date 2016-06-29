@@ -15,13 +15,12 @@
 package Ipe.scripting;
 
 import javafx.stage.Stage;
-
 import java.awt.*;
 
 public class Media {
 
     // Private variables
-    private Stage _stage;
+    private final Stage _stage;
 
     /**
      * Constructor for instance

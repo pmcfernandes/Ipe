@@ -15,15 +15,17 @@ package Ipe.scripting;
 
 import Ipe.browser.WebKit;
 import java.net.URISyntaxException;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class UI {
 
     // Private variables
-    private Stage _stage;
+    private final Stage _stage;
 
     /**
      * Constructor for instance
@@ -34,14 +36,29 @@ public class UI {
         this._stage = stage;
     }
 
-    public void createDialog(String url, String title, int width, int height) throws URISyntaxException {
-        Stage stage = new Stage();
-        Scene scene = new Scene(new WebKit(url, this._stage), width, height, Color.web("#666970"));
-
+    /**
+     * 
+     * @param name
+     * @param url
+     * @param title
+     * @param width
+     * @param height
+     * @throws URISyntaxException 
+     */
+    public void createDialog(String name, String url, String title, int width, int height) throws URISyntaxException {
+        Scene scene = new Scene(new WebKit(url, this._stage), width, height, Color.web("#fff"));
+        
+        Stage stage = new Stage();  
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(this._stage);
         stage.setTitle(title);
         stage.setScene(scene);
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent we) {
+                
+            }
+        });        
         stage.show();
     }
 }

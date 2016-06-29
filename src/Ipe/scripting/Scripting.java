@@ -15,6 +15,7 @@
 package Ipe.scripting;
 
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
@@ -68,8 +69,12 @@ public class Scripting {
      * @param msg
      */
     public void error(String msg) {
-        JOptionPane.showMessageDialog(null, msg,
-                "Error", JOptionPane.ERROR_MESSAGE);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+
+        alert.showAndWait();
     }
 
     /**
@@ -77,8 +82,12 @@ public class Scripting {
      * @param msg
      */
     public void info(String msg) {
-        JOptionPane.showMessageDialog(null, msg,
-                "Information", JOptionPane.INFORMATION_MESSAGE);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+
+        alert.showAndWait();
     }
 
     /**
@@ -86,8 +95,12 @@ public class Scripting {
      * @param msg
      */
     public void alert(String msg) {
-        JOptionPane.showMessageDialog(null, msg,
-                "Alert", JOptionPane.DEFAULT_OPTION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Alert");
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+
+        alert.showAndWait();
     }
 
     /**

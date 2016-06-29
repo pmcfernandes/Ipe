@@ -9,10 +9,10 @@ function btnQuit_Click() {
 }
 
 function btnPasteClipboard_Click() {
-    var x = window.app.Clipboard.getText()
+    var x = window.app.Clipboard.getText();
     document.getElementById("demo").innerHTML = x;
 }
 
 function btnNewWindow_Click() {
-    window.app.UI.createDialog("index_1.html", "Test a new window", 300, 200);
+    window.app.UI.createDialog("my_name", "index_1.html", "Test a new window", 300, 200);
 }

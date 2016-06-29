@@ -11,7 +11,6 @@
 // the GNU General Public License for more details. You should have received a copy of the GNU 
 // General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 
 // Temple Place, Suite 330, Boston, MA 02111-1307 USA
-
 package Ipe.scripting;
 
 import java.io.IOException;
@@ -25,66 +24,63 @@ import windows.prefs.INIFile;
  * @author Pedro
  */
 public class Properties {
-     private INIFile file;
-    
+
+    private INIFile file;
+
     /**
-     * 
+     *
      */
     public Properties() {
         loadProperties();
     }
-    
+
     /**
-     * 
+     *
      */
     private void loadProperties() {
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream("manifest.ini");
-        
+
         try {
             file = new INIFile(stream);
         } catch (IOException ex) {
             Logger.getLogger(Properties.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }
-    
+
     /**
-     * 
+     *
      * @param name
-     * @return 
+     * @return
      */
     public String getString(String name) {
         return file.getString("properties", name, "");
     }
-    
+
     /**
-     * 
+     *
      * @param name
-     * @return 
+     * @return
      */
     public double getDouble(String name) {
-        return file.getDouble("properties", name, new Double(0));
+        return file.getDouble("properties", name, (double) 0);
     }
-    
+
     /**
-     * 
+     *
      * @param name
-     * @return 
+     * @return
      */
     public int getInt(String name) {
-        return file.getInt("properties", name, new Integer(0));
+        return file.getInt("properties", name, 0);
     }
-    
+
     /**
-     * 
+     *
      * @param name
-     * @return 
+     * @return
      */
     public Boolean hasProperty(String name) {
         String str = file.getString("properties", name, "");
-        if (str.isEmpty() == true) {
-            return false;
-        } else {
-            return true;
-        }
+        return str.isEmpty() != true;
     }
 }

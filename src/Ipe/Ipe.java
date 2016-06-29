@@ -62,7 +62,7 @@ public class Ipe extends Application {
         this.loadManifest(primaryStage);
 
         // create the scene       
-        scene = new Scene(new WebKit("index.html", primaryStage), 750, 500, Color.web("#666970"));
+        scene = new Scene(new WebKit("index.html", primaryStage), 750, 500, Color.web("#fff"));
         if (scene == null) {
             return;
         }

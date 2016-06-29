@@ -24,12 +24,13 @@ import javafx.concurrent.Worker.State;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import netscape.javascript.JSObject;
 
 /**
@@ -57,7 +58,8 @@ public class WebKit extends Region {
 
     /**
      *
-     * @param server
+     * @param url
+     * @param stage
      * @throws URISyntaxException
      */
     public WebKit(String url, Stage stage) throws URISyntaxException {
@@ -68,8 +70,12 @@ public class WebKit extends Region {
         webEngine.setOnAlert(new EventHandler<WebEvent<String>>() {
             @Override
             public void handle(WebEvent<String> arg0) {
-                JOptionPane.showMessageDialog(null, arg0.getData(),
-                        "Alert", JOptionPane.INFORMATION_MESSAGE);
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Alert");
+                alert.setHeaderText(null);
+                alert.setContentText(arg0.getData());
+
+                alert.showAndWait();
             }
         });
 

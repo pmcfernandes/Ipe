@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  */
 public class NativeHostHandler implements HttpHandler {
 
-    private String rootUri;
+    private final String rootUri;
 
     /**
      *
@@ -150,7 +150,7 @@ public class NativeHostHandler implements HttpHandler {
             }
 
             if (!contentType.equals("") && b != null) { // 200: OK
-                header.set("Server", "Indigo");
+                header.set("Server", "Ipe");
                 header.set("Accept-Ranges", "bytes");
                 header.set("Content-Type", contentType);
                 header.set("Content-Length", (new Integer(b.length)).toString());
@@ -163,7 +163,7 @@ public class NativeHostHandler implements HttpHandler {
 
                 System.out.println("Response content type = " + contentType);
             } else {
-                header.set("Server", "Indigo");
+                header.set("Server", "Ipe");
                 header.set("Connection", "Close");
                 exchange.sendResponseHeaders(404, 0);
             }
